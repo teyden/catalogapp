@@ -9,9 +9,8 @@ Base = declarative_base()
 
 """
 NOTES:
-- Add code to drop old DB when refreshed
-- Currently does not account for image_url field that was added 
-
+- Add image_url field [DONE]
+- Add script to drop old DB 
 """
 
 class Category(Base):
