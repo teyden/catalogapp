@@ -21,22 +21,34 @@ session = DBSession()
 
 # Random Category
 category1 = Category(name="Random")
-
 session.add(category1)
 session.commit() 
 
 categoryitem1 = CategoryItem(name="Particles", description="are everywhere", image_url="http://",
                      category=category1)
-
 session.add(categoryitem1)
 session.commit()
 
 
 categoryitem2 = CategoryItem(name="Stuff", description="eeeverywhere", image_url="http://",
                      category=category1)
-
 session.add(categoryitem2)
 session.commit()
+
+categoryitem3 = CategoryItem(name="MoreThings", description="On the stairs", image_url="http://", category=category1)
+session.add(category3)
+session.commit()
+
+
+# Socks Category
+category2 = Category(name="Socks")
+session.add(category2)
+session.commit()
+
+categoryitem1 = CategoryItem(name="Funky", description="", image_url="", category=category2)
+session.add(categoryitem1)
+session.commit() 
+
 
 print "added category items!"
 
