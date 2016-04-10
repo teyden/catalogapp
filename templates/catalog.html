@@ -1,6 +1,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.css') }}">
 	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 	</head>
 
@@ -8,6 +9,22 @@
 	<body>
 
 <nav>
+<ul class="nav nav-tabs">
+  <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        Categories
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+      <!-- links -->
+    </ul>
+  </li>
+<form class="navbar-form pull-right">
+  <input type="text" class="search-query" placeholder="Search">
+</form>
+</ul>
 <a href='{{url_for('showLogin')}}'>login</a>
 </nav>
 
