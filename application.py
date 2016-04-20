@@ -302,6 +302,20 @@ def deleteCategoryItem(category_name, item_name):
         return render_template('deletecategoryitem.html', category=category, item=itemToDelete)
 
 
+@app.route('/catalog/index', methods=['GET', 'POST'])
+def renderIndex():
+    catalog = session.query(Category).all()
+    return render_template('index.html', catalog=catalog)
+
+
+@app.route('/catalog/index/<category_name>', methods=['GET', 'POST'])
+def renderIndexCategory(category_name):
+    category = session.query(Category).filter_by(name=category_name).one()
+    items = session.query(CategoryItem).filter_by(category_id=category.id)
+    return render_template(
+        'categoryNew.html', category=category, items=items)
+
+
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
     app.debug = True
