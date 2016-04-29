@@ -1,0 +1,60 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.css') }}">
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+
+	
+	<body>
+
+<nav>
+<ul class="nav nav-tabs">
+  <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        Categories
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+      <!-- links -->
+    </ul>
+  </li>
+<form class="navbar-form pull-right">
+  <input type="text" class="search-query" placeholder="Search">
+</form>
+</ul>
+<a href='{{url_for('showLogin')}}'>login</a>
+</nav>
+
+	<div class = 'pane'>
+		<div class = 'header'>
+		<h1>Catalog App</h1>
+	</div>
+
+
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+
+
+		{% for category in catalog %}
+    <div class = 'nameAndPrice'>
+		<a href='{{url_for('showCategory', category_name = category.name)}}'><p>{{ category.name }}</p></a>
+	</div>
+
+		{% endfor %}
+
+		
+	</body>
+</html>

@@ -5,7 +5,53 @@
  */
 
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    padding-top: 30px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    background-color: #F9F9F9;
+}
+
+/* 
+ *
+ * Position Transition 
+ *
+ */ 
+
+.btn {
+  transition: all 0.4s;
+}
+.top.content {
+  top: 0px;
+}
+.bottom.content {
+  top: 50px;
+}
+.btn:hover .top {
+  top: -50px; /* Gives slide up effect by 50 px */
+}
+.btn:hover .bottom {
+  top: 0px;
+}
+.btn .content {
+  transition: top 0.4s
+}
+
+/*
+ *
+ * Color Transition 
+ *
+ */ 
+.dropdown-toggle {
+    background-color: #F0F4C3;
+    color: #F9F9F9;
+    /*transition: background-color 0.4s, color 0.4s;*/
+    transition: all 1s ease 0.4s;
+}
+
+.dropdown-toggle:hover {
+     background-color: #007DA7;
+}
+
+.dropdown-menu {
+    background-color: #F9F9F9;
 }
 
 .slide-image {
@@ -22,7 +68,7 @@ body {
 }
 
 .caption {
-    height: 130px;
+    height: 100px;
     overflow: hidden;
 }
 
@@ -31,7 +77,8 @@ body {
 }
 
 .thumbnail img {
-    width: 100%;
+    /*width: 100%;*/
+    height: 200px;
 }
 
 .ratings {

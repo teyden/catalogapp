@@ -41,7 +41,7 @@ def showLogin():
     state = ''.join(random.choice(string.ascii_uppercase + \
         string.digits) for x in xrange(32))
     login_session['state'] = state
-    return render_template('login.html', STATE=state)
+    return render_template('catalog.html', STATE=state)
 
 
 @app.route('/gconnect', methods=['POST'])
@@ -193,7 +193,7 @@ def categoryItemJSON(category_name, item_name):
 # @app.route('/catalog', defaults={'username': ''})
 # @app.route('/catalog/loggedin/<username>')
 @app.route('/catalog')
-@app.route('/catalog/loggedin')
+# @app.route('/catalog/loggedin')
 def showCatalog():
     """
     A catalog contains a list of all categories in the database. 
@@ -214,10 +214,11 @@ def showCategory(category_name):
 
     C[R]UD 
     """
+    catalog = session.query(Category).all()
     category = session.query(Category).filter_by(name=category_name).one()
     items = session.query(CategoryItem).filter_by(category_id=category.id)
     return render_template(
-        'category.html', category=category, items=items)
+        'category.html', catalog=catalog, category=category, items=items)
 
 
 @app.route('/catalog/<category_name>/<item_name>')
@@ -237,7 +238,7 @@ def addCategoryItem(category_name):
     Adds an item to a category provided by input values in the
     addcategoryitem.html form. 
 
-    CR[U]D 
+    [C]RUD 
     """
     if 'username' not in login_session:
         return redirect('/login')
@@ -249,7 +250,7 @@ def addCategoryItem(category_name):
                            'description'], image_url=request.form['image_url'], category_id=category.id)
         session.add(newItem)
         session.commit()
-        flash("new catagory item created!")
+        flash("New category item (%s) created." % request.form['name'])
         ## After submitting new item, redirects back to main page.
         return redirect(url_for('showCategory', category_name=category_name))
     else:
@@ -276,6 +277,7 @@ def editCategoryItem(category_name, item_name):
             editedItem.image_url = request.form['image_url']
         session.add(editedItem)
         session.commit()
+        flash("Category item (%s) edited." % item_name)
         return redirect(url_for('showCategory', category_name=category_name))
     else:
         return render_template(
@@ -297,6 +299,7 @@ def deleteCategoryItem(category_name, item_name):
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()
+        flash("Category item (%s) deleted." % item_name)
         return redirect(url_for('showCategory', category_name=category_name))
     else:
         return render_template('deletecategoryitem.html', category=category, item=itemToDelete)

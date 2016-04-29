@@ -21,9 +21,7 @@
 		data-approvalprompt="force">
 	</span>
 </div>
-
-<div id="result"> <!-- Response goes here --> 
-</div>
+<div id="result"></div>
 
 <script>
 function signInCallback(authResult) {
@@ -44,7 +42,7 @@ function signInCallback(authResult) {
         if (result) {
           $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
          setTimeout(function() {
-          window.location.href = "/catalog";
+          window.location.href = "/catalog/loggedin";
          }, 4000);
           
 
