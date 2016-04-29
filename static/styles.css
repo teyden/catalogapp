@@ -16,15 +16,35 @@ h2              { font-size: 1.2em; }
 
 p, dd, dt               { color: #CCCCCC;}
 
-a {text-decoration: none; color:#FFFFCC; font-size: .75em;}
+a { text-decoration: none; color:#FFFFCC; font-size: .75em;}
 
-.pane {position:absolute; left: 25%; border: 2px solid;
-    border-radius: 25px; padding: 5px; margin: 5px; border-color: #999999; background-color: #333333 }
-.header         {left:50%; text-align: center;}
-.name {width:50%;display: inline-block; float: left;}
-.description {}
-.price {text-align: right; width:50%; float: right; }
-.editdeletepane{}
+.pane {
+	position:absolute; 
+	left: 25%; 
+	border: 2px solid;
+    border-radius: 25px; 
+    padding: 5px; 
+    margin: 5px; 
+    border-color: #999999; 
+    background-color: #333333 
+}
+.header         {
+	left:50%; 
+	text-align: 
+	center;
+}
+.name {
+	width:50%;
+	display: inline-block; 
+	float: left;
+}
+.description {  }
+.price {
+	text-align: right; 
+	width: 50%; 
+	float: right; 
+}
+.editdeletepane {  }
 
-.flash          { background: #cee5F5; }
-.error          { background: #f0d6d6; padding: 0.5em; }
+.flash { background: #cee5F5; }
+.error { background: #f0d6d6; padding: 0.5em; }
