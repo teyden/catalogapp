@@ -1,22 +1,22 @@
 body {
     font-family: Georgia, Times, serif;
     color: purple;
-    background-color: #d8da3d
+    /*background-color: #d8da3d*/ 
 }
-h1 {
+/*h1 {
     font-family: Helvetica, Arial
-}
+}*/
 
 
-body            { font-family: sans-serif; background-image: url('img3.jpg'); background-color: #333333}
+body            { font-family: sans-serif; }
 h1, h2, h3, h4       { color: #FFFFFF; }
 h1, h2          { font-family: 'Georgia', serif; margin: 0; }
 h1              { border-bottom: 2px solid #eee; }
 h2              { font-size: 1.2em; }
 
-p, dd, dt               { color: #CCCCCC;}
+p, dd, dt               { color: #757575;}
 
-a { text-decoration: none; color:#FFFFCC; font-size: .75em;}
+a { text-decoration: none; color:#424242; font-size: .75em;}
 
 .pane {
 	position:absolute; 
@@ -48,3 +48,12 @@ a { text-decoration: none; color:#FFFFCC; font-size: .75em;}
 
 .flash { background: #cee5F5; }
 .error { background: #f0d6d6; padding: 0.5em; }
+
+.jumbotron {
+	background-color: #C5CAE9;
+	color: #455A64;
+}
+
+.g-signin {
+	width: 200%;
+}

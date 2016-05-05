@@ -6,7 +6,11 @@
 
         	<div class="col-md-12"> 
         		<div class="jumbotron"> 
-        			{{ category.name }}
+        			<p>
+                        {{ category.name }} Shelter
+                        <a href="{{ url_for('addCategoryItem', category_name=category.name) }}"><span class="glyphicon glyphicon-plus"></span></a>
+                        <a href="#"><span class="glyphicon glyphicon-minus"></a>
+                    </p>
         		</div>
 
                 <div class="row">
@@ -15,12 +19,16 @@
                         <div class="thumbnail">
                             <img src="{{ item.image_url }}" class="img-circle">
                             <div class="caption">
-                                <h4><a href="{{ url_for('showCategoryItem', category_name=category.name, item_name=item.name) }}">{{ item.name }}</a>
+                                <h4><a href="{{ url_for('showCategoryItem', category_id=item.category_id, item_name=item.name) }}">{{ item.name }}</a>
                                 </h4>
                                 <p>{{ item.description }}</p>
                         		<p class="pull-right">
-	                        		<a href="{{ url_for('editCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-edit"></span></a>
-	                        		<a href="{{ url_for('deleteCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                    {% if 'item.user_id' == 'login_user_id' %}
+                                        <a href="{{ url_for('editCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-edit"></span></a>
+                                        <a href="{{ url_for('deleteCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                    {% else %}
+                                      -
+                                    {% endif %}
 	                        	</p>
                         	</div>
                             <p>

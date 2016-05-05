@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from database_setup import Base, Category, CategoryItem
+from database_setup import Base, Category, CategoryItem, User
 
-engine = create_engine('sqlite:///catalog.db')
+engine = create_engine('sqlite:///catalog2.db')
 # Bind the engine to the metadata of the Base class so that the
 # declaratives can be accessed through a DBSession instance
 Base.metadata.bind = engine
@@ -63,8 +63,11 @@ def addDog(session, info):
 	if validFields(info):
 		category_item = CategoryItem(name=info["name"], 
 			description=info["description"], 
-			image_url=info["image_url"], 
-			category=info["category"])
+			image_url=info["image_url"],
+			category_id=info["category_id"],
+			category=info["category"],
+			user_id=info["user_id"],
+			user=info["user"])
 		session.add(category_item)
 		session.commit()
 	else:
@@ -72,14 +75,19 @@ def addDog(session, info):
 
 
 import numpy as np 
+Canine = session.query(Category).filter_by(name="Canine").one()
+FirstUSer = session.query(User).filter_by(name="Teyden Nguyen").one()
 
 L = len(character_adjectives)
-Maltese = Category(name="Maltese")
-malteses = []
+dogs = []
 for i, image in enumerate(maltese_images):
-	newMaltese = {}
-	newMaltese["image_url"] = image 
-	newMaltese["name"] = names[i] 
+	newDog = {}
+	newDog["image_url"] = image 
+	newDog["name"] = names[i] 
+	newDog["category_id"] = 1
+	newDog["user_id"] = 100
+	newDog["user"] = FirstUSer
+
 	x = 0
 	description = ""
 	while x < 3:
@@ -87,12 +95,12 @@ for i, image in enumerate(maltese_images):
 		description += character_adjectives[k] + ", "
 		x += 1
 	description = description[:-2] + "."
-	newMaltese["description"] = description
-	newMaltese["category"] = Maltese
-	malteses += [newMaltese]
+	newDog["description"] = description
+	newDog["category"] = Canine
+	dogs += [newDog]
 
 
-for dog in malteses:
+for dog in dogs:
 	addDog(session, dog) 
 
 session.close() 

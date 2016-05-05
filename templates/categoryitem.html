@@ -1,39 +1,30 @@
-<html>
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.css') }}">
-	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
-	</head>
+{% extends "main.html" %}
+{% block content %}
 
+	<div class="row">
+		<div class="col-md-12"> 
+			<div class="jumbotron">
+				<p>
+					<a href="{{ url_for('showCategory', category_name=category.name) }}">
+					<span class="glyphicon glyphicon-menu-left"></span>
+					</a>
+					{{ category.name }}
+				</p>
+			</div>
 
-	<body>
-	<div class = 'pane'>
-		<div class = 'header'>
-		<h1>{{ category.name }}</h1>
+			<span class = 'name'> 
+				<p>{{ item.name }}</p> 
+			</span>
+
+				<div class = 'description'>
+					<p>{{ item.description }}</p>
+				</div>
+
+				<div class = "editdeletepane">
+					<a href='{{url_for('editCategoryItem', category_name = category.name, item_name = item.name)}}'>Edit</a>
+					<a href='{{url_for('deleteCategoryItem', category_name = category.name, item_name = item.name)}}'>Delete</a>
+				</div>
+		</div>
 	</div>
 
-
-		<span class = 'name'> 
-			<p>{{ item.name }}</p> 
-		</span>
-
-		<div class = 'description'>
-			<p>{{ item.description }}</p>
-		</div>
-
-		<div class = "editdeletepane">
-
-		<a href='{{url_for('editCategoryItem', category_name = category.name, item_name = item.name)}}'>Edit </a>
-		
-		<a href='{{url_for('deleteCategoryItem', category_name = category.name, item_name = item.name)}}'>Delete</a>
-
-		</div>
-
-
-	</div>
-	</body>
-
-
-
-
-</html>
+{% endblock %}
