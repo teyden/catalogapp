@@ -1,7 +1,7 @@
 <!-- GOOGLE PLUS SIGN IN-->
 <div id="signinButton">
   <span class="g-signin"
-    data-scope="openid"
+    data-scope="openid email"
     data-clientid="933625394112-qjn4aru8v9c80ngt27guu65niqqop0ri.apps.googleusercontent.com"
     data-redirecturi="postmessage"
     data-accesstype="offline"
@@ -10,7 +10,9 @@
     data-approvalprompt="force">
   </span>
 </div>
-<div id="result"></div>
+<div id="result">
+  
+</div>
 
 <script>
 function signInCallback(authResult) {
@@ -31,7 +33,7 @@ function signInCallback(authResult) {
         if (result) {
           $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
          setTimeout(function() {
-          window.location.href = "/catalog";
+          window.location.href = "/";
          }, 4000);
           
 

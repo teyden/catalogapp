@@ -3,24 +3,30 @@
 
         <!-- Page Content -->
         <div class="row">
-
         	<div class="col-md-12"> 
-        		<div class="jumbotron"> 
-        			{{ category.name }}
+        		<div class="well text-center"> 
+        			<h2>
+                        {{ category.name }} Shelter
+                    </h2>
+                    <a href="{{ url_for('addCategoryItem', category_name=category.name) }}"><i class="fa fa-plus"></i> add</a>
         		</div>
 
                 <div class="row">
           			{% for item in items %}
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <img src="{{ item.image_url }}" class="img-circle">
+                            <img src="{{ item.image_url }}" class="img-round">
                             <div class="caption">
-                                <h4><a href="{{ url_for('showCategoryItem', category_name=category.name, item_name=item.name) }}">{{ item.name }}</a>
+                                <h4><a href="{{ url_for('showCategoryItem', category_id=item.category_id, item_name=item.name) }}">{{ item.name }}</a>
                                 </h4>
                                 <p>{{ item.description }}</p>
                         		<p class="pull-right">
-	                        		<a href="{{ url_for('editCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-edit"></span></a>
-	                        		<a href="{{ url_for('deleteCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                    {% if item.user_id == login_session['user_id'] %}
+                                        <a href="{{ url_for('editCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-edit"></span></a>
+                                        <a href="{{ url_for('deleteCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                    {% else %}
+                                      
+                                    {% endif %}
 	                        	</p>
                         	</div>
                             <p>
@@ -31,33 +37,8 @@
                         </div>
                     </div>
                     {% endfor %}
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$24.99</h4>
-                                <h4><a href="#">First Product</a>
-                                </h4>
-                                <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-
 	        </div>
-
         </div>
 
 {% endblock %}

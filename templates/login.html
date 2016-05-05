@@ -1,0 +1,19 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="row">
+	<div class="col-md-12">
+		<div class="jumbotron">
+			<p>Sign in via:</p>
+			{% include "googlesignin.html" %}
+			{% include "facebooksignin.html" %}
+
+			<div
+			  class="fb-like"
+			  data-share="true"
+			  data-width="450"
+			  data-show-faces="true">
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

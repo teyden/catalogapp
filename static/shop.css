@@ -1,0 +1,111 @@
+/*!
+ * Start Bootstrap - Shop Homepage HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+body {
+    padding-top: 30px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    background-color: #F9F9F9;
+}
+
+/*
+ *
+ *
+ * Navbar
+ *
+ */
+
+.navbar-brand { position: relative; z-index: 2; }
+.navbar-nav.navbar-right .btn { position: relative; z-index: 2; padding: 4px 20px; margin: 10px auto; transition: transform 0.3s; }
+.navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 100px; padding-right: 100px; } 
+.btn.btn-circle { border-radius: 50px; color: #FAFAFA; }
+.btn.btn-circle:hover { background-color: #C8E6C9; transition: all 1s ease 0.4s;  }
+.btn.btn-outline { background-color: #FAFAFA; color: #6A1B9A; transition: all 1s ease 0.4s; }
+
+/* 
+ *
+ * Modal Transition
+ *
+ */ 
+
+
+/* 
+ *
+ * Position Transition 
+ *
+ */ 
+
+.btn { transition: all 0.4s; }
+.top.content { top: 0px; }
+.bottom.content { top: 50px; }
+.btn:hover .top { top: -50px; /* Gives slide up effect by 50 px */ }
+.btn:hover .bottom { top: 0px; }
+.btn .content { transition: top 0.4s; }
+
+/*
+ *
+ * Color Transition 
+ *
+ */ 
+.dropdown-toggle {
+    background-color: #F0F4C3;
+    color: #F9F9F9;
+    /*transition: background-color 0.4s, color 0.4s;*/
+    transition: all 1s ease 0.3s;
+}
+
+.dropdown-toggle:hover { background-color: #007DA7; }
+.dropdown-menu { background-color: #F9F9F9; }
+
+
+/*
+ *
+ * 
+ *
+ */ 
+.slide-image {
+    width: 100%;
+}
+
+.caption {
+    height: 100px;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.cover-images {
+    padding: -10px;
+    position: relative;
+}
+
+.cover-images img {
+    height: 50px;
+}
+
+.thumbnail img {
+    /*width: 100%;*/
+    height: 200px;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+footer {
+    margin: 50px 0;
+}
