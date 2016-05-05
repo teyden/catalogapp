@@ -3,23 +3,22 @@
 		
 		<div class="row">
 			<div class="col-md-12">
-				<div class="jumbotron">
-					{% for category in catalog %}
-					<ul>
-						<li><a href="{{ url_for('showCategory', category_name=category.name) }}"><span class="glyphicon glyphicon-dog"></span>{{ category.name }}</a></li>
-					</ul>
-					{% endfor %}
+				<hr>
+				<div class="jumbotron-main text-center">
+					<i class="fa fa-heart-o"></i> animal adoption network
 				</div>
 			</div>
 		</div>
 
 
         <div class="row">
-			<div class="cover-images">
-			{% for item in items %}
-            	<a href="{{ url_for('showCategoryItem', category_id=item.category_id, item_name=item.name) }}"><img src="{{ item.image_url }}"></a>
-            {% endfor %}
-            </div>
+        	<div class="col-md-12">
+				<div class="cover-images">
+				{% for item in items %}
+	            	<a href="{{ url_for('showCategoryItem', category_id=item.category_id, item_name=item.name) }}"><img src="{{ item.image_url }}"></a>
+	            {% endfor %}
+	            </div>
+	        </div>
         </div>
 
 {% endblock %}

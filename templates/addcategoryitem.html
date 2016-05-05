@@ -1,22 +1,32 @@
 {% extends "main.html" %}
 {% block content %}
 
-<h1>New Category Item</h1>
+<div class="row">
+	<div class="col-md-12">
+		<div class="jumbotron">
+			<p><a href="{{ url_for('showCategory', category_name=category.name)}}"><i class="fa fa-chevron-left"></i> {{category.name}}</a></p>
+		</div>
 
-<div class = 'pane'>
-<form action="{{ url_for('addCategoryItem', category_name = category.name )}}" method = 'post'>
-
-<dl>
-	<dt>Name:</dt>
-		<dd><input type ='text' size='30' name='name' required></dd>
-            <dt>Description:</dt>
-                        <dd><textarea name = 'description' rows='5' cols='40' required></textarea></dd>
-            <dt>Image URL:</dt>
-                        <dd><input type = 'text' size='100' name='image_url' optional></dd>
-
-</dl>
-
-
-<input type='submit' value='Create'>
+		<div class="jumbotron">
+			<p>Add more {{category.name|lower}}s to the {{category.name}} Shelter</p>
+			<hr>
+			<form action="{{ url_for('addCategoryItem', category_name=category.name )}}" method='post'>
+				<dl>
+					<dt>Name:</dt>
+						<dd><input type='text' size='30' name='name' required class="form-control input-md"></dd>
+		            <dt>Description</dt>
+		                        <dd><textarea name = 'description' rows='5' cols='40' class="form-control input-md" required></textarea></dd>
+		            <dt>Type (breed)</dt>
+		            	<dd><input name="item_type" type="text" placeholder="" class="form-control input-md"></dd>
+		            <dt>Age (years)</dt>
+		            	<dd><input name="age" type="text" placeholder="" class="form-control input-md"></dd>
+		            <dt>Image URL</dt>
+		                <dd><input type='text' size='100' name='image_url' class="form-control input-md" optional></dd>
+				</dl>
+				<input type='submit' value='Create' class="btn btn-success">
+			</form>
+		</div>
+	</div>
+</div>
 
 {% endblock %}

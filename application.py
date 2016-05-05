@@ -74,15 +74,16 @@ def loggedIn():
 
 
 def createUser(login_session):
-    newUser = User(name=login_session['username'], email=login_session['gplus_id'], picture=login_session['picture'])
+    newUser = User(name=login_session['username'], email=login_session[
+                   'email'], picture=login_session['picture'])
     session.add(newUser)
     session.commit()
-    user = session.query(User).filter_by(email=login_session['gplus_id']).one()
+    user = session.query(User).filter_by(email=login_session['email']).one()
     return user.id
 
 
 def getUserInfo(user_id):
-    user = session.query(User).filter_by(email=user_id).one()
+    user = session.query(User).filter_by(id=user_id).one()
     return user
 
 
@@ -279,13 +280,13 @@ def gconnect():
     print data 
     login_session['username'] = data['name']
     login_session['picture'] = data['picture']
-    # login_session['email'] = data['email']
+    login_session['email'] = data['email']
 
     # ADD PROVIDER TO LOGIN SESSION
     login_session['provider'] = 'google'
 
     # see if user exists, if it doesn't make a new one
-    name = getUserID(data["gplus_id"])
+    user_id = getUserID(data["email"])
     if not user_id:
         user_id = createUser(login_session)
     login_session['user_id'] = user_id
@@ -299,6 +300,7 @@ def gconnect():
     output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
     flash("You are now logged in as %s" % login_session['username'])
     loginState(True)
+    printLoginSession()
     print "done!"
     return output
 
@@ -344,7 +346,7 @@ def disconnect():
         if login_session['provider'] == 'google':
             gdisconnect()
             del login_session['gplus_id']
-            del login_session['credentials']
+            del login_session['access_token']
         if login_session['provider'] == 'facebook':
             fbdisconnect()
             del login_session['facebook_id']
@@ -430,7 +432,7 @@ def showCatalog():
     for category in catalog:
         items += session.query(CategoryItem).filter_by(category_id=category.id).all()
 
-    return render_template('catalog.html', catalog=catalog, items=items, log_action=LOGIN_STATE['action'])
+    return render_template('catalog.html', catalog=catalog, items=items, login_session=login_session)
 
 
 @app.route('/catalog/<category_name>')
@@ -452,7 +454,7 @@ def showCategory(category_name):
         login_session['user_id'] = None 
 
     return render_template(
-        'category.html', catalog=catalog, category=category, items=items, log_action=LOGIN_STATE['action'], login_user_id=login_session['user_id'])
+        'category.html', catalog=catalog, category=category, items=items, login_session=login_session)
 
 
 @app.route('/catalog/<category_id>/<item_name>')
@@ -467,7 +469,7 @@ def showCategoryItem(category_id, item_name):
         login_session['user_id'] = None 
 
     return render_template(
-        'categoryitem.html', item=item, description=item.description, category=category, log_action=LOGIN_STATE['action'], login_user_id=login_session['user_id'])
+        'categoryitem.html', item=item, description=item.description, category=category, login_session=login_session)
 
 
 @app.route('/catalog/<category_name>/add', methods=['GET', 'POST'])
@@ -478,21 +480,19 @@ def addCategoryItem(category_name):
 
     [C]RUD 
     """
-    if not loggedIn(): 
-        return redirect('/userlog/in')
-
     category = session.query(Category).filter_by(name=category_name).one()
 
     if request.method == 'POST':
         newItem = CategoryItem(name=request.form['name'], description=request.form[
-                           'description'], image_url=request.form['image_url'], category_id=category.id)
+                           'description'], image_url=request.form['image_url'], category_id=category.id,
+                           item_type=request.form['image_url'], user_id=login_session['user_id'])
         session.add(newItem)
         session.commit()
         flash("New category item (%s) created." % request.form['name'])
         ## After submitting new item, redirects back to main page.
-        return redirect(url_for('showCategory', category_name=category_name, log_action=LOGIN_STATE['action']))
+        return redirect(url_for('showCategory', category_name=category_name, login_session=login_session))
     else:
-        return render_template('addcategoryitem.html', category=category, log_action=LOGIN_STATE['action'])
+        return render_template('addcategoryitem.html', category=category, login_session=login_session)
 
 
 @app.route('/catalog/<category_name>/<item_name>/edit', methods=['GET', 'POST'])
@@ -516,13 +516,15 @@ def editCategoryItem(category_name, item_name):
             editedItem.description = request.form['description']
         if request.form['image_url']:
             editedItem.image_url = request.form['image_url']
+        if request.form['item_type']:
+            editedItem.item_type = request.form['item_type']
         session.add(editedItem)
         session.commit()
         flash("Category item (%s) edited." % item_name)
-        return redirect(url_for('showCategory', category_name=category_name, log_action=LOGIN_STATE['action']))
+        return redirect(url_for('showCategory', category_name=category_name, login_session=login_session))
     else:
         return render_template(
-            'editcategoryitem.html', category=category, item=editedItem, log_action=LOGIN_STATE['action'])
+            'editcategoryitem.html', category=category, item=editedItem, login_session=login_session)
 
 
 @app.route('/catalog/<category_name>/<item_name>/delete', methods=['GET', 'POST'])
@@ -546,9 +548,9 @@ def deleteCategoryItem(category_name, item_name):
         session.delete(itemToDelete)
         session.commit()
         flash("Category item (%s) deleted." % item_name)
-        return redirect(url_for('showCategory', category_name=category_name, log_action=LOGIN_STATE['action']))
+        return redirect(url_for('showCategory', category_name=category_name, login_session=login_session))
     else:
-        return render_template('deletecategoryitem.html', category=category, item=itemToDelete, log_action=LOGIN_STATE['action'])
+        return render_template('deletecategoryitem.html', category=category, item=itemToDelete, login_session=login_session)
 
 
 ## IMPLEMENT THIS WITH TICK BOX SELECTORS SO YOU COULD DELETE MORE THAN ONE AT ONCE

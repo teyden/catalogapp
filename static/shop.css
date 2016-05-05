@@ -9,6 +9,20 @@ body {
     background-color: #F9F9F9;
 }
 
+/*
+ *
+ *
+ * Navbar
+ *
+ */
+
+.navbar-brand { position: relative; z-index: 2; }
+.navbar-nav.navbar-right .btn { position: relative; z-index: 2; padding: 4px 20px; margin: 10px auto; transition: transform 0.3s; }
+.navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 100px; padding-right: 100px; } 
+.btn.btn-circle { border-radius: 50px; color: #FAFAFA; }
+.btn.btn-circle:hover { background-color: #C8E6C9; transition: all 1s ease 0.4s;  }
+.btn.btn-outline { background-color: #FAFAFA; color: #6A1B9A; transition: all 1s ease 0.4s; }
+
 /* 
  *
  * Modal Transition
@@ -22,24 +36,12 @@ body {
  *
  */ 
 
-.btn {
-  transition: all 0.4s;
-}
-.top.content {
-  top: 0px;
-}
-.bottom.content {
-  top: 50px;
-}
-.btn:hover .top {
-  top: -50px; /* Gives slide up effect by 50 px */
-}
-.btn:hover .bottom {
-  top: 0px;
-}
-.btn .content {
-  transition: top 0.4s
-}
+.btn { transition: all 0.4s; }
+.top.content { top: 0px; }
+.bottom.content { top: 50px; }
+.btn:hover .top { top: -50px; /* Gives slide up effect by 50 px */ }
+.btn:hover .bottom { top: 0px; }
+.btn .content { transition: top 0.4s; }
 
 /*
  *
@@ -50,28 +52,20 @@ body {
     background-color: #F0F4C3;
     color: #F9F9F9;
     /*transition: background-color 0.4s, color 0.4s;*/
-    transition: all 1s ease 0.4s;
+    transition: all 1s ease 0.3s;
 }
 
-.dropdown-toggle:hover {
-     background-color: #007DA7;
-}
+.dropdown-toggle:hover { background-color: #007DA7; }
+.dropdown-menu { background-color: #F9F9F9; }
 
-.dropdown-menu {
-    background-color: #F9F9F9;
-}
 
+/*
+ *
+ * 
+ *
+ */ 
 .slide-image {
     width: 100%;
-}
-
-.carousel-holder {
-    margin-bottom: 30px;
-}
-
-.carousel-control,
-.item {
-    border-radius: 4px;
 }
 
 .caption {
