@@ -49,7 +49,7 @@ class Category(Base):
             'name': self.name,
             'id': self.id,
             'user_id': self.user_id,
-            'user': self.user
+            'user': self.user.name
         }
 
 
@@ -77,8 +77,8 @@ class CategoryItem(Base):
             'item_type': self.item_type,
             'category_id': self.category_id,
             'category': self.category.name,
-            'user_id': self.user_id, 
-            'user': self.user
+            'user_id': self.user_id,
+            'user': self.user.name
         }
 
 
