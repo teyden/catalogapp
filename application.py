@@ -1,13 +1,3 @@
-"""
-NOTES/TODO:
-
-1. Change URIs - remove CRUD action name in the URI. Does not follow naming convention.
-2. Make gdisconnect work
-3. Implement Facebook login
-4. Edit html pages
-
-"""
-
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -41,7 +31,17 @@ session = DBSession()
 
 
 ## Helper Functions
+def loggedIn():
+    if login_session['user_id'] is not None:
+        return True 
+    else:
+        return False
+
+
 def createUser(login_session):
+    """
+    Creates a new user if the user doesn't already exist in the DB. 
+    """
     newUser = User(name=login_session['username'], email=login_session[
                    'email'], picture=login_session['picture'])
     session.add(newUser)
@@ -69,7 +69,6 @@ def showLogin():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
                     for x in xrange(32))
     login_session['state'] = state
-    # return "The current session state is %s" % login_session['state']
     return render_template('login.html', STATE=state)
 
 
@@ -294,6 +293,9 @@ def addCategoryItem(category_name):
 
     [C]RUD 
     """
+    if not loggedIn():
+        return redirect(url_for('showLogin'))
+
     category = session.query(Category).filter_by(name=category_name).one()
 
     if request.method == 'POST':
@@ -317,6 +319,11 @@ def editCategoryItem(category_name, item_name):
     
     CR[U]D 
     """
+    if not loggedIn():
+        return redirect(url_for('showLogin'))
+
+    print login_session
+
     category = session.query(Category).filter_by(name=category_name).one()
     editedItem = session.query(CategoryItem).filter_by(category_id=category.id, name=item_name).one()
 
@@ -347,6 +354,9 @@ def deleteCategoryItem(category_name, item_name):
     
     CRU[D] 
     """
+    if not loggedIn():
+        return redirect(url_for('showLogin'))
+
     category = session.query(Category).filter_by(name=category_name).one()
     itemToDelete = session.query(CategoryItem).filter_by(category_id=category.id, name=item_name).one()
     

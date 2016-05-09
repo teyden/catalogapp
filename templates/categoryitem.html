@@ -16,9 +16,11 @@
 				<h2>{{ item.name }}</h2> 
 				<img src="{{ item.image_url }}"> 
 				<p>{{ item.description }}</p>
-
-                <a href="{{ url_for('editCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-edit"></span></a>
-                <a href="{{ url_for('deleteCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-trash"></span></a>
+					{% if item.user_id == login_session['user_id'] %}
+		                <a href="{{ url_for('editCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-edit"></span></a>
+		                <a href="{{ url_for('deleteCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-trash"></span></a>
+		            {% else %}
+		            {% endif %}
 			</div>
 		</div>
 	</div>

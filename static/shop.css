@@ -2,6 +2,8 @@
  * Start Bootstrap - Shop Homepage HTML Template (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ * 
+ * (TWITTER BOOTSTRAP TEMPLATE WAS USED AND EDITED FOR UDACITY PROJECT)
  */
 
 body {
@@ -22,13 +24,6 @@ body {
 .btn.btn-circle { border-radius: 50px; color: #FAFAFA; }
 .btn.btn-circle:hover { background-color: #C8E6C9; transition: all 1s ease 0.4s;  }
 .btn.btn-outline { background-color: #FAFAFA; color: #6A1B9A; transition: all 1s ease 0.4s; }
-
-/* 
- *
- * Modal Transition
- *
- */ 
-
 
 /* 
  *
