@@ -41,10 +41,6 @@ session = DBSession()
 
 
 ## Helper Functions
-def report(str):
-    print "REPORT: ||| %s() |||" % str
-
-
 def createUser(login_session):
     newUser = User(name=login_session['username'], email=login_session[
                    'email'], picture=login_session['picture'])
@@ -80,14 +76,6 @@ def showLogin():
 ## GOOGLE OAUTH
 @app.route('/gconnect', methods=['GET', 'POST'])
 def gconnect():
-    report("gconnect")
-    printLoginSession()
-    # Validate state token
-    # print "login_session: ", 
-    # print login_session
-    loginState(False)
-    print request.args.get('state')
-    print login_session['state']
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
@@ -139,13 +127,10 @@ def gconnect():
         response = make_response(json.dumps('Current user is already connected.'),
                                  200)
         response.headers['Content-Type'] = 'application/json'
-        loginState(True)
         flash("Current user is already connected.")
         print login_session
         return response 
 
-    report("MADE IT PAST ALL IF'S")
-    printLoginSession()
     print "ACCESS_TOKEN:", access_token
     # Store the access token in the session for later use.
     login_session['access_token'] = credentials.access_token
@@ -158,7 +143,6 @@ def gconnect():
 
     data = answer.json()
 
-    print data 
     login_session['username'] = data['name']
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
@@ -180,15 +164,12 @@ def gconnect():
     output += login_session['picture']
     output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
     flash("You are now logged in as %s" % login_session['username'])
-    loginState(True)
-    printLoginSession()
     print "done!"
     return output
 
 
 @app.route('/gdisconnect')
 def gdisconnect():
-    report("gdisconnect()")
     # Only disconnect a connected user.
     credentials = login_session.get('credentials')
     if credentials is None:
@@ -211,7 +192,6 @@ def gdisconnect():
 # Disconnect based on provider
 @app.route('/disconnect')
 def disconnect():
-    printLoginSession()
     if 'provider' in login_session:
         if login_session['provider'] == 'google':
             gdisconnect()
