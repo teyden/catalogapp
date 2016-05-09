@@ -1,13 +1,3 @@
-"""
-NOTES/TODO:
-
-1. Change URIs - remove CRUD action name in the URI. Does not follow naming convention.
-2. Make gdisconnect work
-3. Implement Facebook login
-4. Edit html pages
-
-"""
-
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
