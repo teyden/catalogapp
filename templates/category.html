@@ -20,13 +20,13 @@
                                 <h4><a href="{{ url_for('showCategoryItem', category_id=item.category_id, item_name=item.name) }}">{{ item.name }}</a>
                                 </h4>
                                 <p>{{ item.description }}</p>
-                        		<p class="pull-right">
+                        		<h5>
                                     {% if item.user_id == login_session['user_id'] %}
                                         <a href="{{ url_for('editCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-edit"></span></a>
                                         <a href="{{ url_for('deleteCategoryItem', category_name=category.name, item_name=item.name) }}"><span class="glyphicon glyphicon-trash"></span></a>
                                     {% else %}
                                     {% endif %}
-	                        	</p>
+	                        	</h5>
                         	</div>
                             <p>
                                 <span class="glyphicon glyphicon-dog"></span>
